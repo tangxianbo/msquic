@@ -1,5 +1,11 @@
 name: BuildForUnity
 
+# Attention
+# iOS use static
+# Android use dynamic
+# Windows use dynamic
+# MacOs use dynamic
+
 on:
   workflow_dispatch:
   push:
@@ -31,7 +37,7 @@ jobs:
         os: ['windows-2022']
         arch: [x64]
         tls: [quictls]
-        static: ['', '-Static']
+        static: ['']
         exclude:
         # OpenSSL/quictls doesn't support arm64
         - tls: quictls
@@ -64,7 +70,7 @@ jobs:
         arch: [arm64]
         tls: [quictls]
         systemcrypto: ['', '-UseSystemOpenSSLCrypto']
-        static: ['', '-Static']
+        static: ['']
         clang: ['', '-Clang']
         codecheck: ['', '-CodeCheck']
         xdp: ['', '-UseXdp']
@@ -127,7 +133,7 @@ jobs:
         os: ['macos-13']
         arch: [arm64]
         tls: [quictls]
-        static: ['', '-Static']
+        #static: ['', '-Static']
     uses: ./.github/workflows/build-reuse-unix.yml
     with:
       config: ${{ matrix.config }}
@@ -135,5 +141,5 @@ jobs:
       os: ${{ matrix.os }}
       arch: ${{ matrix.arch }}
       tls: ${{ matrix.tls }}
-      static: ${{ matrix.static }}
+      static: ${{ matrix.plat == 'macos' && '' || '-Static' }}
       repo: ${{ github.repository }}
