@@ -141,5 +141,5 @@ jobs:
       os: ${{ matrix.os }}
       arch: ${{ matrix.arch }}
       tls: ${{ matrix.tls }}
-      static: ${{ matrix.plat == 'macos' && '' || '-Static' }}
+      static: ${{ matrix.plat == 'ios' && '-Static' || '' }}
       repo: ${{ github.repository }}
