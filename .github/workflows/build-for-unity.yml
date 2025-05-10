@@ -137,6 +137,3 @@ jobs:
       tls: ${{ matrix.tls }}
       static: ${{ matrix.static }}
       repo: ${{ github.repository }}
-
-  Complete:
-    name: Build Complete
