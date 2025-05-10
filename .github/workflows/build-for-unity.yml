@@ -140,12 +140,3 @@ jobs:
 
   Complete:
     name: Build Complete
-    if: always()
-    needs: [build-windows, build-windows-official, build-windows-kernel, build-ubuntu-cross-compile, build-ubuntu, build-darwin, build-nuget]
-    runs-on: ubuntu-latest
-    permissions: {} # No need for any permissions.
-    steps:
-    - name: Decide whether the needed jobs succeeded or failed
-      uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe
-      with:
-        jobs: ${{ toJSON(needs) }}
